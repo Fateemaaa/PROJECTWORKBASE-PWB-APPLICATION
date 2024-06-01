@@ -1,0 +1,58 @@
+<!-- create-project.ejs -->
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Create New Project</title>
+  <link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+    <nav>
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/projects">Projects</a></li>
+          <li><a href="/issues">Issues</a></li>
+          <li><a href="/create-project">Create-Project</a></li>
+          <% if (authenticated) { %>
+            <li style="float: right;"><a href="/logout">Logout</a></li>
+          <% } else { %>
+            <li style="float: right;"><a href="/login">Login</a></li>
+          <% } %>
+        </ul>
+      </nav>
+  <div class="container">
+    <% if (!authenticated) { %>
+      <h1>Not Authenticated</h1>
+      <p>Please login to create a new project.</p>
+    <% } else if (!isAdmin) { %>
+      <h1>Unauthorized Access</h1>
+      <p>You are not authorized to access this page.</p>
+    <% } else { %>
+      <h1>Create New Project</h1>
+      <form action="/create-project" method="POST">
+        <div class="form-group">
+          <label for="projectName">Project Name</label>
+          <input type="text" id="projectName" name="projectName" required>
+        </div>
+        <div class="form-group">
+          <label for="projectDescription">Project Description</label>
+          <textarea id="projectDescription" name="projectDescription" required></textarea>
+        </div>
+        <div class="form-group">
+          <label for="startDate">Start Date</label>
+          <input type="date" id="startDate" name="startDate" required>
+        </div>
+        <div class="form-group">
+          <label for="endDate">End Date</label>
+          <input type="date" id="endDate" name="endDate" required>
+        </div>
+        <div class="form-group">
+          <label for="teamLeadId">Team Lead ID</label>
+          <input type="number" id="teamLeadId" name="teamLeadId" required>
+        </div>
+        <button type="submit">Create Project</button>
+      </form>
+    <% } %>
+  </div>
+</body>
+</html>

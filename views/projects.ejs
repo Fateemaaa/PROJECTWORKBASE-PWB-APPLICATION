@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Projects</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav>
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/projects">Projects</a></li>
+          <li><a href="/issues">Issues</a></li>
+          <li><a href="/create-project">Create-Project</a></li>
+          <% if (authenticated) { %>
+            <li style="float: right;"><a href="/logout">Logout</a></li>
+          <% } else { %>
+            <li style="float: right;"><a href="/login">Login</a></li>
+          <% } %>
+        </ul>
+      </nav>
+
+  <div class="container">
+    <% if (!authenticated) { %>
+      <h1>Not Authenticated</h1>
+      <p>Please login to view projects</p>
+    <% } else if (projects.length === 0) { %>
+      <h1>No Projects Available</h1>
+      <p>There are no projects to display.</p>
+    <% } else { %>
+      <h1>Projects</h1>
+      <ul class="projects-list">
+        <% projects.forEach(function(project) { %>
+          <li class="project-card">
+            <h3><a href="/projects/<%= project.project_id %>"><%= project.project_name %> (<%= project.project_id %>)</a></h3>
+            <p>Status: <%= project.current_state %></p>
+            <p>Summary: <%= project.project_summary %></p>
+          </li>
+        <% }); %>
+      </ul>
+    <% } %>
+  </div>
+</body>
+</html>

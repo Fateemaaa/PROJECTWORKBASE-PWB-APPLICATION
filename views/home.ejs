@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Home</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <nav>
+        <ul>
+          <li><a href="/home">Home</a></li>
+          <li><a href="/projects">Projects</a></li>
+          <li><a href="/issues">Issues</a></li>
+          <li><a href="/create-project">Create-Project</a></li>
+          <% if (authenticated) { %>
+            <li style="float: right;"><%= user.user_name %> | <a href="/logout">Logout</a></li>
+          <% } else { %>
+            <li style="float: right;"><a href="/login">Login</a></li>
+          <% } %>
+        </ul>
+      </nav>
+
+  <% if (authenticated) { %>
+    <h1>Welcome, <%= user.user_name %>!</h1>
+    <p>Email: <%= user.user_email %></p>
+    <p>Role: <%= user.user_role %></p>
+  <% } else { %>
+    <h1>Not Authenticated</h1>
+    <p>Please login to view user details</p>
+  <% } %>
+</body>
+</html>
